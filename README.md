@@ -1,18 +1,33 @@
-# Spring Auditing POC
+# Spring Data JPA Auditing Demo
 
-Small Spring Boot project showing Spring Data JPA date auditing with an embedded H2 database and CRUD REST endpoints.
+A compact Spring Boot REST API demonstrating automatic auditing fields using Spring Data JPA.
 
-## Run
+## Features
+
+- CRUD API for todo items.
+- Automatic `createdDate` and `lastModifiedDate` handling.
+- In-memory H2 database for zero-setup local runs.
+- Bean Validation on incoming API payloads.
+
+## Stack
+
+- Java 17
+- Spring Boot 3.x
+- Spring Data JPA
+- H2 Database
+- Maven
+
+## Run Locally
 
 ```bash
 mvn spring-boot:run
 ```
 
-API base URL: `http://localhost:8080/api/todos`
+Base URL: `http://localhost:8080/api/todos`
 
-## Verify Auditing with curl (bash)
+## Quick API Smoke Test
 
-1. Create one record and capture JSON:
+Create:
 
 ```bash
 curl -s -X POST http://localhost:8080/api/todos \
@@ -20,12 +35,7 @@ curl -s -X POST http://localhost:8080/api/todos \
   -d '{"title":"First task","details":"Created from curl"}'
 ```
 
-Expected concept:
-- `createdDate` is set automatically.
-- `lastModifiedDate` is set automatically.
-- On create, both timestamps should initially match.
-
-2. Update same record (id `1`):
+Update (`id=1`):
 
 ```bash
 curl -s -X PUT http://localhost:8080/api/todos/1 \
@@ -33,31 +43,33 @@ curl -s -X PUT http://localhost:8080/api/todos/1 \
   -d '{"title":"First task updated","details":"Updated from curl"}'
 ```
 
-Expected concept:
-- `createdDate` stays unchanged.
-- `lastModifiedDate` changes to a newer timestamp.
-
-3. Read it back:
+Get one:
 
 ```bash
 curl -s http://localhost:8080/api/todos/1
 ```
 
-4. List all:
+Get all:
 
 ```bash
 curl -s http://localhost:8080/api/todos
 ```
 
-5. Delete it:
+Delete:
 
 ```bash
 curl -i -X DELETE http://localhost:8080/api/todos/1
 ```
 
-## Helpful Extras
+## Auditing Behavior
 
-- H2 Console: `http://localhost:8080/h2-console`
+- `createdDate` is populated once, when the entity is created.
+- `lastModifiedDate` is updated on each successful update.
+- On creation, both timestamps typically start with the same value.
+
+## H2 Console
+
+- URL: `http://localhost:8080/h2-console`
 - JDBC URL: `jdbc:h2:mem:auditingdb`
-- Username: `sa`
-- Password: (empty)
+- User: `sa`
+- Password: empty
