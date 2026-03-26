@@ -6,6 +6,8 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import java.time.Instant;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -19,19 +21,20 @@ public class TodoItem {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotBlank
+	@Size(max = 120)
 	@Column(nullable = false)
 	private String title;
 
+	@Size(max = 500)
 	private String details;
 
 	@CreatedDate
-	// @Column(nullable = false, updatable = false)
-	@Column
+	@Column(nullable = false, updatable = false)
 	private Instant createdDate;
 
 	@LastModifiedDate
-	// @Column(nullable = false)
-	@Column
+	@Column(nullable = false)
 	private Instant lastModifiedDate;
 
 	public Long getId() {

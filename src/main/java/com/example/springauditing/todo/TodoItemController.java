@@ -1,5 +1,6 @@
 package com.example.springauditing.todo;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +36,7 @@ public class TodoItemController {
 	}
 
 	@PostMapping
-	public ResponseEntity<TodoItem> create(@RequestBody TodoItem request) {
+	public ResponseEntity<TodoItem> create(@Valid @RequestBody TodoItem request) {
 		TodoItem todo = new TodoItem();
 		todo.setTitle(request.getTitle());
 		todo.setDetails(request.getDetails());
@@ -44,7 +45,7 @@ public class TodoItemController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<TodoItem> update(@PathVariable Long id, @RequestBody TodoItem request) {
+	public ResponseEntity<TodoItem> update(@PathVariable Long id, @Valid @RequestBody TodoItem request) {
 		return repository.findById(id)
 			.map(existing -> {
 				existing.setTitle(request.getTitle());
