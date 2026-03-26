@@ -13,18 +13,24 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>spring-data-jpa-auditing-demo</name>
 	<description>Demo REST API showcasing Spring Data JPA auditing with H2 and CRUD endpoints.</description>
-	<url/>
+	<url>https://github.com/garodriguezlp/spring-boot-jpa-auditing-demo</url>
 	<licenses>
-		<license/>
+		<license>
+			<name>GNU General Public License v2.0</name>
+			<url>https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</url>
+		</license>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<id>garodriguezlp</id>
+			<name>Gustavo Rodriguez</name>
+		</developer>
 	</developers>
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection>scm:git:https://github.com/garodriguezlp/spring-boot-jpa-auditing-demo.git</connection>
+		<developerConnection>scm:git:ssh://git@github.com/garodriguezlp/spring-boot-jpa-auditing-demo.git</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/garodriguezlp/spring-boot-jpa-auditing-demo</url>
 	</scm>
 	<properties>
 		<java.version>17</java.version>
